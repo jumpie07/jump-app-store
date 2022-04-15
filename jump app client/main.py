@@ -8,7 +8,7 @@ import pandas as pd
 from sys import platform
 from requests import get
 
-server_ip = "http://127.0.0.1:5000"
+server_ip = "http://127.0.0.1:5001"
 
 
 def check_settings():
@@ -39,8 +39,8 @@ appname = loaded_rasp["appname"]
 applink = loaded_rasp["applink"]
 
 link = getlink(appname,name)
-
-open(f"./temp/{appname}.tar.gz","w").write(get(link).content)
+print(link)
+open(f"./temp/{appname}.tar.gz","wb").write(get(link).content)
 downloaded = tarfile.open(f"./temp/{appname}.tar.gz","r:gz")
 downloaded.extractall()
 downloaded.close()
