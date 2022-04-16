@@ -30,7 +30,6 @@ settings_df = pd.read_feather("./data/settings.feather").to_json()
 settings_json = json.loads(settings_df)
 OS = settings_json["OS"]
 OS = OS["0"]
-print(OS)
 rasp = get(f"{server_ip}/db/json").content.decode()
 pd.read_json(rasp).to_feather("./data/rasp.feather")
 name = input("App Name: ")
