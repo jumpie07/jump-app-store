@@ -38,9 +38,6 @@ def return_feather():
 
 @app.route("/apps/<name>")
 def return_file(name):
-    try:
-        return send_from_directory("./apps", filename=name, as_attachment=True)
-    except:
-        return "404"
+    return open(f"./apps/{name}","rb").read()
 if __name__ == "__main__":
     app.run(port=5001,debug=True)

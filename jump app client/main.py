@@ -7,7 +7,7 @@ from os import remove
 import pandas as pd
 from sys import platform
 from requests import get
-
+from os.path import basename
 server_ip = "http://127.0.0.1:5001"
 
 
@@ -36,11 +36,13 @@ name = input("App Name: ")
 loaded_rasp = json.loads(rasp)
 appname = loaded_rasp["appname"]
 applink = loaded_rasp["applink"]
-
 link = getlink(appname,name)
-print(link)
-open(f"./temp/{appname}.tar.gz","wb").write(get(link).content)
-downloaded = tarfile.open(f"./temp/{appname}.tar.gz","r:gz")
-downloaded.extractall()
-downloaded.close()
-remove(f"./temp/{appname}.tar.gz")
+filename = basename(link)
+x = get(link).content
+open(f"./temp/{filename}","wb").write(x)
+#open(f"./temp/{appl}")
+#downloaded = tarfile.open(f"./temp/{appname}.tar.gz","r:gz")
+#downloaded.extractall()
+#downloaded.close()
+#remove(f"./temp/{appname}.tar.gz")
+
