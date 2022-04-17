@@ -8,6 +8,7 @@ import pandas as pd
 from sys import platform
 from requests import get
 from os.path import basename
+from time import sleep
 server_ip = "http://127.0.0.1:5001"
 
 
@@ -37,12 +38,11 @@ loaded_rasp = json.loads(rasp)
 appname = loaded_rasp["appname"]
 applink = loaded_rasp["applink"]
 link = getlink(appname,name)
+print(link)
 filename = basename(link)
 x = get(link).content
 open(f"./temp/{filename}","wb").write(x)
-#open(f"./temp/{appl}")
-#downloaded = tarfile.open(f"./temp/{appname}.tar.gz","r:gz")
-#downloaded.extractall()
-#downloaded.close()
-#remove(f"./temp/{appname}.tar.gz")
-
+downloaded = tarfile.open(f"./temp/{filename}","r:gz")
+downloaded.extractall()
+downloaded.close()
+sleep(3)
